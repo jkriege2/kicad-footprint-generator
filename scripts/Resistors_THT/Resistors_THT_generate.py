@@ -590,8 +590,11 @@ if __name__ == '__main__':
     makeRES_SIMPLERECT_HOR(     30,    30,  24,   8,      1.2,    "5",            [0, 0, 0],       [1/2.54,1/2.54,1/2.54],       0)
 
     #                          rm, rmdisp,    l,      d, ddrill,   R_POW,    x_3d=[0,0,0],   s_3d=[1/2.54,1/2.54,1/2.54], has3d=1, specialfpname="", largepadsx=0, largepadsy=0
-    makeRES_SIMPLECIRC_VER(   5.08,     5,   15,      5,      1,     "2",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
-    makeRES_SIMPLECIRC_VER(    7.5,   7.5,   24,     10,      1,     "5",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
+    #makeRES_SIMPLECIRC_VER(   5.08,     5,   15,      5,      1,     "2",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
+    #makeRES_SIMPLECIRC_VER(    7.5,   7.5,   24,     10,      1,     "5",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
+    makeRES_SIMPLECIRC_VER(   2.54,   2.5,   15,    2.3,      1,   "1/4",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
+    makeRES_SIMPLECIRC_VER(   5.08,     5,   15,    2.3,      1,   "1/4",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
+    makeRES_SIMPLECIRC_VER(    7.5,   7.5,   24,    2.3,      1,   "1/4",       [0, 0, 0],        [1/2.54,1/2.54,1/2.54],       0)
 
     #rm, rmdisp, l, w, h, ddrill, material, R_POW, x_3d=[0, 0, 0], s_3d=[1 / 2.54, 1 / 2.54, 1 / 2.54],  has3d=1, specialfpname="", largepadsx=0, largepadsy=0, specialtags=[]
     #                          rm, rmdisp,    l,      w,      h, ddrill,      material,    R_POW,    x_3d=[0,0,0],   s_3d=[1/2.54,1/2.54,1/2.54], has3d=1, specialfpname="", largepadsx=0, largepadsy=0
