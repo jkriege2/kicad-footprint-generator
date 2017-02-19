@@ -286,7 +286,7 @@ class pack:
             self.metal = [self.plastic[0], 19.9,
                           2]  # width,heigth,thickness of metal plate, starting at metal_offset from bottom-left
             self.pins = 3  # number of pins
-            self.rm = 5.47  # pin distance
+            self.rm = 5.45  # pin distance
             self.pad = [2.5, 3.5]  # width/height of pads
             self.drill = 1.5  # diameter of pad drills
             self.name = name  # name of package
