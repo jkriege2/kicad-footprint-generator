@@ -27,8 +27,8 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
     l_slk = (coldist * (cols - 1) - w_slk) / 2
     t_slk = -overlen_top - slk_offset
     
-    w_crt = max(package_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset
-    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * crt_offset
+    w_crt = max(package_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset_connector
+    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * crt_offset_connector
     l_crt = coldist * (cols - 1) / 2 - w_crt / 2
     t_crt = (rows - 1) * rm / 2 - h_crt / 2
     
@@ -72,6 +72,8 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
     # set general values
     kicad_modg.append(
         Text(type='reference', text='REF**', at=[coldist * (cols - 1) / 2, t_slk - txt_offset], layer='F.SilkS'))
+    kicad_modg.append(
+        Text(type='user', text='%R', at=[coldist * (cols - 1) / 2, t_slk - txt_offset], layer='F.Fab'))
     kicad_modg.append(Text(type='value', text=footprint_name, at=[coldist * (cols - 1) / 2, t_slk + h_slk + txt_offset],
                            layer='F.Fab'))
     
@@ -138,7 +140,7 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
     
     # add model
     kicad_modg.append(
-        Model(filename=lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
+        Model(filename="${KISYS3DMOD}/"+lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())
@@ -184,10 +186,10 @@ def makePinHeadAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_leng
     l_slk = -rm / 2
     t_slk = -rm / 2
     
-    w_crt = rm / 2 + (cols - 1) * coldist + pack_offset + pack_width + pin_length + 2 * crt_offset
-    h_crt = h_fabb + 2 * crt_offset
-    l_crt = -rm / 2 - crt_offset
-    t_crt = -rm / 2 - crt_offset
+    w_crt = rm / 2 + (cols - 1) * coldist + pack_offset + pack_width + pin_length + 2 * crt_offset_connector
+    h_crt = h_fabb + 2 * crt_offset_connector
+    l_crt = -rm / 2 - crt_offset_connector
+    t_crt = -rm / 2 - crt_offset_connector
     
     # if rm == 2.54:
     #    footprint_name = "Pin_Header_Angled_{0}x{1:02}".format(cols, rows)
@@ -229,9 +231,11 @@ def makePinHeadAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_leng
     
     # set general values
     kicad_modg.append(
-        Text(type='reference', text='REF**', at=[l_crt + w_crt / 2, t_crt + crt_offset - txt_offset], layer='F.SilkS'))
+        Text(type='reference', text='REF**', at=[l_crt + w_crt / 2, t_crt + crt_offset_connector - txt_offset], layer='F.SilkS'))
     kicad_modg.append(
-        Text(type='value', text=footprint_name, at=[l_crt + w_crt / 2, t_crt + h_crt - crt_offset + txt_offset],
+        Text(type='user', text='%R', at=[l_crt + w_crt / 2, t_crt + crt_offset_connector - txt_offset], layer='F.Fab'))
+    kicad_modg.append(
+        Text(type='value', text=footprint_name, at=[l_crt + w_crt / 2, t_crt + h_crt - crt_offset_connector + txt_offset],
              layer='F.Fab'))
     
     # create FAB-layer
@@ -321,7 +325,7 @@ def makePinHeadAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_leng
     
     # add model
     kicad_modg.append(
-        Model(filename=lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
+        Model(filename="${KISYS3DMOD}/" +lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())
@@ -366,10 +370,10 @@ def makeSocketStripAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_
     l_slk = -rm / 2
     t_slk = -rm / 2
     
-    w_crt = -1*(rm / 2 + (cols - 1) * coldist + pack_offset + pack_width  + 2 * crt_offset)
-    h_crt = h_fabb + 2 * crt_offset
-    l_crt = rm / 2 + crt_offset
-    t_crt = -rm / 2 - crt_offset
+    w_crt = -1*(rm / 2 + (cols - 1) * coldist + pack_offset + pack_width  + 2 * crt_offset_connector)
+    h_crt = h_fabb + 2 * crt_offset_connector
+    l_crt = rm / 2 + crt_offset_connector
+    t_crt = -rm / 2 - crt_offset_connector
     
     # if rm == 2.54:
     #    footprint_name = "Pin_Header_Angled_{0}x{1:02}".format(cols, rows)
@@ -411,9 +415,11 @@ def makeSocketStripAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_
     
     # set general values
     kicad_modg.append(
-        Text(type='reference', text='REF**', at=[l_crt + w_crt / 2, t_crt + crt_offset - txt_offset], layer='F.SilkS'))
+        Text(type='reference', text='REF**', at=[l_crt + w_crt / 2, t_crt + crt_offset_connector - txt_offset], layer='F.SilkS'))
     kicad_modg.append(
-        Text(type='value', text=footprint_name, at=[l_crt + w_crt / 2, t_crt + h_crt - crt_offset + txt_offset],
+        Text(type='user', text='%R', at=[l_crt + w_crt / 2, t_crt + crt_offset_connector - txt_offset], layer='F.Fab'))
+    kicad_modg.append(
+        Text(type='value', text=footprint_name, at=[l_crt + w_crt / 2, t_crt + h_crt - crt_offset_connector + txt_offset],
              layer='F.Fab'))
     
     # create FAB-layer
@@ -496,7 +502,7 @@ def makeSocketStripAngled(rows, cols, rm, coldist, pack_width, pack_offset, pin_
     
     # add model
     kicad_modg.append(
-        Model(filename=lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
+        Model(filename="${KISYS3DMOD}/" +lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())
@@ -534,8 +540,8 @@ def makePinHeadStraightSMD(rows, cols, rm, coldist, rmx_pad_offset,rmx_pin_lengt
     l_slk = (coldist * (cols - 1) - w_slk) / 2
     t_slk = -overlen_top - slk_offset
     
-    w_crt = max(package_width, coldist * (cols - 1)+2*rmx_pad_offset + pad[0]) + 2 * crt_offset
-    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * crt_offset
+    w_crt = max(package_width, coldist * (cols - 1)+2*rmx_pad_offset + pad[0]) + 2 * crt_offset_connector
+    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * crt_offset_connector
     l_crt = coldist * (cols - 1) / 2 - w_crt / 2
     t_crt = (rows - 1) * rm / 2 - h_crt / 2
     
@@ -584,10 +590,9 @@ def makePinHeadStraightSMD(rows, cols, rm, coldist, rmx_pad_offset,rmx_pin_lengt
     kicad_mod.append(kicad_modg)
     
     # set general values
-    kicad_modg.append(
-        Text(type='reference', text='REF**', at=[coldist * (cols - 1) / 2, t_slk - txt_offset], layer='F.SilkS'))
-    kicad_modg.append(Text(type='value', text=footprint_name, at=[coldist * (cols - 1) / 2, t_slk + h_slk + txt_offset],
-                           layer='F.Fab'))
+    kicad_modg.append(Text(type='reference', text='REF**', at=[coldist * (cols - 1) / 2, t_slk - txt_offset], layer='F.SilkS'))
+    kicad_modg.append(Text(type='user', text='%R', at=[coldist * (cols - 1) / 2, t_slk - txt_offset], layer='F.Fab'))
+    kicad_modg.append(Text(type='value', text=footprint_name, at=[coldist * (cols - 1) / 2, t_slk + h_slk + txt_offset],layer='F.Fab'))
 
     cleft = range(0, rows, 2)
     cright = range(1, rows, 2)
@@ -646,26 +651,26 @@ def makePinHeadStraightSMD(rows, cols, rm, coldist, rmx_pad_offset,rmx_pin_lengt
     
     if cols==1:
         for c in cleft:
-            kicad_modg.append(Pad(number=c+1, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c*rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+            kicad_modg.append(Pad(number=c+1, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c*rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
         for c in cright:
-            kicad_modg.append(Pad(number=c+1, type=pad_type, shape=pad_shape1, at=[rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+            kicad_modg.append(Pad(number=c+1, type=pad_type, shape=pad_shape1, at=[rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
     elif cols==2:
         p = 1
         for c in range(0,rows):
             if isSocket:
-                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[coldist+rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[coldist+rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
                 p=p+1
-                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c * rm], size=pad, drill=ddrill, layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c * rm], size=pad, drill=ddrill, layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
                 p=p+1
             else:
-                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c * rm], size=pad, drill=ddrill, layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[-rmx_pad_offset, c * rm], size=pad, drill=ddrill, layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
                 p=p+1
-                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[coldist+rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask']))
+                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[coldist+rmx_pad_offset, c * rm], size=pad, drill=ddrill,layers=[pad_layers + '.Cu', pad_layers + '.Mask', pad_layers + '.Paste']))
                 p=p+1
 
     
     # add model
-    kicad_modg.append(Model(filename=lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
+    kicad_modg.append(Model(filename="${KISYS3DMOD}/"+lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())

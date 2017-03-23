@@ -14,6 +14,7 @@ from KicadModTree import *  # NOQA
 from drawing_tools import *
 
 crt_offset = 0.25
+crt_offset_connector = 0.5
 lw_fab = 0.1
 lw_crt = 0.05
 lw_slk = 0.12

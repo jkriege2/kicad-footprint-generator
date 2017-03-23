@@ -71,7 +71,7 @@ if __name__ == '__main__':
                                 rotate3d=[0, 0, 0], isSocket=True)
             makeSocketStripAngled(rows, cols, rm, rm, angled_pack_width, angled_pack_offset,
                               angled_pin_width, ddrill, pad,
-                              [], "Socket_Strip", "Socket_Strip", "socket strip", [(cols - 1) * rm / 2 / 25.4, -(rows - 1) * rm / 2 / 25.4, 0],
+                              [], "Socket_Strips", "Socket_Strip", "socket strip", [(cols - 1) * rm / 2 / 25.4, -(rows - 1) * rm / 2 / 25.4, 0],
                               [1, 1, 1],
                               [0, 0, 90])
             if cols == 2:
